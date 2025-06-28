@@ -30,9 +30,9 @@ pub enum Token {
     EqualEqual,
     #[token("!=")]
     NotEqual,
-    #[token("&")]
+    #[token("&&")]
     And,
-    #[token("|")]
+    #[token("||")]
     Or,
     #[token(">")]
     Greater,
