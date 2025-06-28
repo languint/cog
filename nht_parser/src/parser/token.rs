@@ -122,4 +122,8 @@ pub enum Token {
     KeywordElse,
     #[token("let")]
     KeywordLet,
+    #[token("fn")]
+    KeywordFn,
+    #[token("return")]
+    KeywordReturn,
 }
