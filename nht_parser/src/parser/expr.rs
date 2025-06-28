@@ -27,6 +27,10 @@ pub enum Expr {
         identifier: String,
         parameters: Vec<Expr>,
         body: Box<Expr>,
+        return_type: Option<Types>,
+    },
+    Return {
+        value: Box<Expr>,
     },
     Block(Vec<Expr>),
     IfElse {
