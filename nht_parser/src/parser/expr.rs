@@ -49,7 +49,7 @@ impl Expr {
         Expr::Literal(Nodes::Boolean(value))
     }
 
-    pub fn new_identifier(name: String) -> Self {
-        Expr::Literal(Nodes::Identifier(name))
+    pub fn new_identifier(name: &str) -> Self {
+        Expr::Literal(Nodes::Identifier(name.to_string()))
     }
 }
