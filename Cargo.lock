@@ -9,6 +9,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "3a8241f3ebb85c056b509d4327ad0358fbbba6ffb340bf388f26350aeda225b1"
 
 [[package]]
+name = "cog_cli"
+version = "0.1.0"
+dependencies = [
+ "owo-colors",
+]
+
+[[package]]
+name = "cog_parser"
+version = "0.1.0"
+dependencies = [
+ "logos",
+ "owo-colors",
+]
+
+[[package]]
 name = "fnv"
 version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -52,21 +67,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ebfe8e1a19049ddbfccbd14ac834b215e11b85b90bab0c2dba7c7b92fb5d5cba"
 dependencies = [
  "logos-codegen",
-]
-
-[[package]]
-name = "nht_cli"
-version = "0.1.0"
-dependencies = [
- "owo-colors",
-]
-
-[[package]]
-name = "nht_parser"
-version = "0.1.0"
-dependencies = [
- "logos",
- "owo-colors",
 ]
 
 [[package]]

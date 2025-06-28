@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod math_expr_tests {
-    use nht_parser::parser::{
+    use cog_parser::parser::{
         Parser,
         core::{expr::Expr, nodes::Nodes, ops::BinaryOp},
     };

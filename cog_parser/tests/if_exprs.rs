@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod if_exprs_tests {
-    use nht_parser::parser::{Parser, core::expr::Expr};
+    use cog_parser::parser::{Parser, core::expr::Expr};
 
     #[test]
     fn if_exprs() {

@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod binary_exprs_tests {
-    use nht_parser::parser::{
+    use cog_parser::parser::{
         Parser,
         core::{expr::Expr, ops::BinaryOp},
     };

@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod assign_exprs {
-    use nht_parser::parser::{
+    use cog_parser::parser::{
         Parser,
         core::{expr::Expr, types::Types},
     };
