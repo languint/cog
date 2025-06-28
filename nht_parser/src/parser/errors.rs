@@ -53,7 +53,6 @@ pub fn get_error_message(err: &ParserError) -> String {
             format!("Expected {} after {} {}\n{}", msg, expected, after, slice),
         ),
         ParserError::InvalidAssignment(msg) => (5, format!("Invalid assignment {}", msg)),
-        _ => (-1, "Unknown error".to_string()),
     };
 
     format!(
