@@ -1,6 +1,9 @@
 #[cfg(test)]
 mod assign_exprs {
-    use nht_parser::parser::{Parser, expr::Expr, types::Types};
+    use nht_parser::parser::{
+        Parser,
+        core::{expr::Expr, types::Types},
+    };
 
     #[test]
     fn let_no_type() {

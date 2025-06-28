@@ -1,20 +1,16 @@
 use logos::Logos;
 
 use crate::parser::{
+    core::expr::Expr,
+    core::nodes::Nodes,
+    core::ops::{BinaryOp, UnaryOp},
+    core::token::Token,
+    core::types::Types,
     errors::ParserError,
-    expr::Expr,
-    nodes::Nodes,
-    ops::{BinaryOp, UnaryOp},
-    token::Token,
-    types::Types,
 };
 
+pub mod core;
 pub mod errors;
-pub mod expr;
-pub mod nodes;
-pub mod ops;
-pub mod token;
-pub mod types;
 
 #[derive(Debug, Clone, PartialEq)]
 pub struct Parser {
