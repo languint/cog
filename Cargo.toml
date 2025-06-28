@@ -1,0 +1,5 @@
+[workspace]
+resolver = "3"
+members = ["nht_cli", "nht_parser"]
+
+[workspace.dependencies]
