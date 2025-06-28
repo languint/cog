@@ -1,6 +1,6 @@
 #[cfg(test)]
 mod binary_exprs_tests {
-    use nht_parser::parser::{Parser, expr::Expr, nodes::Nodes, ops::BinaryOp};
+    use nht_parser::parser::{Parser, expr::Expr, ops::BinaryOp};
 
     #[test]
     fn greater_expr() {

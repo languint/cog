@@ -1,8 +1,6 @@
 #[cfg(test)]
 mod assign_exprs {
-    use nht_parser::parser::{
-        Parser, errors::ParserError, expr::Expr, nodes::Nodes, ops::BinaryOp, types::Types,
-    };
+    use nht_parser::parser::{Parser, expr::Expr, types::Types};
 
     #[test]
     fn let_no_type() {
