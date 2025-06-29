@@ -4,3 +4,4 @@ members = ["cog_cli", "cog_core", "cog_parser"]
 
 [workspace.dependencies]
 cog_parser = { path = "cog_parser" }
+cog_core = { path = "cog_core" }

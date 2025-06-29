@@ -4,4 +4,10 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+clap = { version = "4.5.40", features = ["derive"] }
+inkwell = "0.6.0"
 owo-colors = "4.2.2"
+toml = "0.8.23"
+cog_parser = {workspace = true}
+cog_core = {workspace = true}
+serde = { version = "1.0.219", features = ["derive"] }

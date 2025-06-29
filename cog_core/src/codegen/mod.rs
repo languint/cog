@@ -15,22 +15,19 @@ pub mod errors;
 
 pub struct CodeGen<'ctx> {
     pub llvm_ctx: &'ctx Context,
-    pub lvvm_modules: Vec<Module<'ctx>>,
+    pub lvvm_module: Module<'ctx>,
     pub llvm_builder: Builder<'ctx>,
     variables: HashMap<String, (PointerValue<'ctx>, BasicTypeEnum<'ctx>)>,
     main_func: Option<FunctionValue<'ctx>>,
 }
 
 impl<'ctx> CodeGen<'ctx> {
-    pub fn new(context: &'ctx Context, module_names: Vec<&str>) -> Self {
-        let modules = module_names
-            .iter()
-            .map(|n| context.create_module(n))
-            .collect();
+    pub fn new(context: &'ctx Context, name: &str) -> Self {
+        let module = context.create_module(name);
         let builder = context.create_builder();
 
         Self {
-            lvvm_modules: modules,
+            lvvm_module: module,
             llvm_builder: builder,
             llvm_ctx: context,
             variables: HashMap::new(),
@@ -74,13 +71,7 @@ impl<'ctx> CodeGen<'ctx> {
         let i32_type = self.llvm_ctx.i32_type();
         let fn_type = i32_type.fn_type(&[], false); //TODO: Support var args and params later.
 
-        let main_module = self
-            .lvvm_modules
-            .iter()
-            .find(|m| m.get_name().to_str().unwrap() == "main")
-            .unwrap_or_else(|| &self.lvvm_modules[0]);
-
-        let main_func = main_module.add_function(name, fn_type, None);
+        let main_func = self.lvvm_module.add_function(name, fn_type, None);
         let entry = self.llvm_ctx.append_basic_block(main_func, "entry");
         self.llvm_builder.position_at_end(entry);
         self.main_func = Some(main_func);
