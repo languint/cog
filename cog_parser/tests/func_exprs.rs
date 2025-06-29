@@ -41,8 +41,19 @@ mod func_exprs_test {
             return a + b;
         }";
         let expected = vec![Expr::FunctionDeclaration {
-            identifier: "main".into(),
-            parameters: vec![],
+            identifier: "add".into(),
+            parameters: vec![
+                Expr::Declaration {
+                    identifier: "a".into(),
+                    var_type: Some(Types::I32),
+                    value: Box::new(Expr::new_identifier("placeholder")),
+                },
+                Expr::Declaration {
+                    identifier: "b".into(),
+                    var_type: Some(Types::I32),
+                    value: Box::new(Expr::new_identifier("placeholder")),
+                },
+            ],
             body: Box::new(Expr::Block(vec![Expr::Return {
                 value: Box::new(Expr::Binary {
                     left: Box::new(Expr::new_identifier("a")),
