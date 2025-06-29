@@ -10,16 +10,11 @@ pub enum ParserError {
     UnexpectedToken(String),
     UnexpectedEndOfInput,
     ExpectedToken(String),
-    ExpectedAfter(
-        /* expected */ String,
-        /* after */ String,
-        /* slice */ String,
-    ),
+    ExpectedAfter(/* expected */ String, /* after */ String),
     ExpectedAfterCustom(
         /* msg */ String,
         /* expected */ String,
         /* after */ String,
-        /* slice */ String,
     ),
     InvalidAssignment(String),
 }
@@ -44,14 +39,13 @@ pub fn get_error_message(err: &ParserError) -> String {
         ParserError::UnexpectedToken(token) => (1, format!("Unexpected token `{}`", token)),
         ParserError::UnexpectedEndOfInput => (2, "Unexpected end of input".to_string()),
         ParserError::ExpectedToken(token) => (3, format!("Expected token `{}`", token)),
-        ParserError::ExpectedAfter(expected, after, slice) => (
+        ParserError::ExpectedAfter(expected, after) => (
             4,
-            format!("Expected token `{}` after `{}`\n{}", expected, after, slice),
+            format!("Expected token `{}` after `{}`", expected, after),
         ),
-        ParserError::ExpectedAfterCustom(msg, expected, after, slice) => (
-            4,
-            format!("Expected {} after {} {}\n{}", msg, expected, after, slice),
-        ),
+        ParserError::ExpectedAfterCustom(msg, expected, after) => {
+            (4, format!("Expected {} after {} {}", msg, expected, after))
+        }
         ParserError::InvalidAssignment(msg) => (5, format!("Invalid assignment {}", msg)),
     };
 
