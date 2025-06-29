@@ -1,5 +1,5 @@
 [workspace]
 resolver = "3"
-members = ["cog_cli", "cog_parser"]
+members = ["cog_cli", "cog_core", "cog_parser"]
 
 [workspace.dependencies]
