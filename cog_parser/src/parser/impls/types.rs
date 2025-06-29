@@ -13,8 +13,6 @@ impl Parser {
                     match type_name.as_str() {
                         "i32" => Ok(Types::I32),
                         "i64" => Ok(Types::I64),
-                        "u32" => Ok(Types::U32),
-                        "u64" => Ok(Types::U64),
                         "f32" => Ok(Types::F32),
                         "f64" => Ok(Types::F64),
                         "bool" => Ok(Types::Bool),
@@ -29,14 +27,6 @@ impl Parser {
                 Token::KeywordTypeI64 => {
                     self.advance();
                     Ok(Types::I64)
-                }
-                Token::KeywordTypeU32 => {
-                    self.advance();
-                    Ok(Types::U32)
-                }
-                Token::KeywordTypeU64 => {
-                    self.advance();
-                    Ok(Types::U64)
                 }
                 Token::KeywordTypeF32 => {
                     self.advance();

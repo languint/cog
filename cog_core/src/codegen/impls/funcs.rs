@@ -1,4 +1,5 @@
 use cog_parser::parser::core::{expr::Expr, types::Types};
+use inkwell::types::BasicType;
 
 use crate::codegen::{CodeGen, errors::CodeGenError};
 
@@ -10,8 +11,9 @@ impl<'ctx> CodeGen<'ctx> {
         body: &Expr,
         ret_type: &Option<Types>,
     ) -> Result<(), CodeGenError> {
-        let i32_type = self.llvm_ctx.i32_type();
-        let fn_type = i32_type.fn_type(&[], false); //TODO: Support var args and params later.
+        let ret_type = if let Some(t) = ret_type { self.get_llvm_type(t) } else { self.get_llvm_type(&Types::I32)};
+
+        let fn_type = ret_type.fn_type(&[], false); //TODO: Support var args and params later.
 
         let main_func = self.lvvm_module.add_function(name, fn_type, None);
         let entry = self.llvm_ctx.append_basic_block(main_func, "entry");

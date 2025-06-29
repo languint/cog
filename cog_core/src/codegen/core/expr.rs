@@ -1,4 +1,4 @@
-use cog_parser::parser::core::{expr::Expr, types::Types};
+use cog_parser::parser::core::{expr::Expr};
 
 use crate::codegen::{CodeGen, errors::CodeGenError};
 

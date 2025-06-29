@@ -79,10 +79,6 @@ pub enum Token {
     KeywordTypeI32,
     #[token("i64")]
     KeywordTypeI64,
-    #[token("u32")]
-    KeywordTypeU32,
-    #[token("u64")]
-    KeywordTypeU64,
     #[token("f32")]
     KeywordTypeF32,
     #[token("f64")]
