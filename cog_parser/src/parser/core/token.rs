@@ -20,6 +20,8 @@ pub enum Token {
     MinusMinus,
     #[token("!")]
     Bang,
+    #[token("&")]
+    Ampersand,
 
     /* assignment operators */
     #[token("=")]

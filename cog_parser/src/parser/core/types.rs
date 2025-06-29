@@ -6,4 +6,5 @@ pub enum Types {
     F64,
     Bool,
     String,
+    Pointer(Box<Types>),
 }

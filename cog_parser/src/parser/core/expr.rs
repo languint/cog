@@ -38,6 +38,8 @@ pub enum Expr {
         then_branch: Box<Expr>,
         else_branch: Option<Box<Expr>>,
     },
+    AddressOf(Box<Expr>),
+    Dereference(Box<Expr>),
 }
 
 impl Expr {

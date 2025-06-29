@@ -106,6 +106,6 @@ impl Parser {
             });
         }
 
-        self.primary()
+        self.pointer_ops()
     }
 }

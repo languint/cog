@@ -44,8 +44,12 @@ impl Parser {
                     self.advance();
                     Ok(Types::String)
                 }
+                Token::Star => {
+                    self.advance();
+                    let pointee_type = self.parse_type()?;
+                    Ok(Types::Pointer(Box::new(pointee_type)))
+                }
                 _ => {
-                    dbg!(self.peek().cloned());
                     Err(ParserError::ExpectedToken("type".into()))
                 }
             }

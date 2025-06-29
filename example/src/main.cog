@@ -1,3 +1,6 @@
 fn main() -> i32 {
-    return 0;
+    let x = 10;
+    let ptr_x = &x;
+    let y: i32 = *ptr_x;
+    return y;
 }

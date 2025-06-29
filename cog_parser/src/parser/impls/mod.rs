@@ -3,6 +3,8 @@ pub mod funcs;
 pub mod if_else;
 pub mod ops;
 pub mod parse;
+pub mod pointer_ops;
 pub mod primary;
 pub mod types;
 pub mod vars;
+
