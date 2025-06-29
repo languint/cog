@@ -1,4 +1,8 @@
-use crate::parser::{core::{expr::Expr, nodes::Nodes, token::Token}, errors::ParserError, Parser};
+use crate::parser::{
+    Parser,
+    core::{expr::Expr, nodes::Nodes, token::Token},
+    errors::ParserError,
+};
 
 impl Parser {
     pub fn primary(&mut self) -> Result<Expr, ParserError> {
@@ -28,7 +32,9 @@ impl Parser {
                     self.advance(); // consume `(`
                     let expr = self.expression()?;
                     if !self.match_token(&Token::RightParen) {
-                        return Err(ParserError::ExpectedAfter(")".into(), "expression".into()));
+                        return Err(ParserError::MalformedExpression(
+                            "expected `)` after expression".into(),
+                        ));
                     }
                     Ok(expr)
                 }
@@ -41,7 +47,9 @@ impl Parser {
                     }
 
                     if self.previous() != Some(&Token::RightBrace) {
-                        return Err(ParserError::ExpectedAfter("}".into(), "block".into()));
+                        return Err(ParserError::MalformedBlock(
+                            "expected `}` after block".into(),
+                        ));
                     }
 
                     Ok(Expr::Block(statements))

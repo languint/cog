@@ -1,8 +1,11 @@
-use crate::parser::{core::{expr::Expr, nodes::Nodes, token::Token}, errors::ParserError, Parser};
+use crate::parser::{
+    Parser,
+    core::{expr::Expr, nodes::Nodes, token::Token},
+    errors::ParserError,
+};
 
 impl Parser {
     pub fn assignment(&mut self) -> Result<Expr, ParserError> {
-        // if `let` exists, it's consumed here.
         if self.match_token(&Token::KeywordLet) {
             if let Some(Token::Identifier(name)) = self.peek().cloned() {
                 self.advance(); // consume identifier
@@ -14,10 +17,8 @@ impl Parser {
                 };
 
                 if !self.match_token(&Token::Equal) {
-                    return Err(ParserError::ExpectedAfterCustom(
-                        "=".into(),
-                        "".into(),
-                        "identifier".into(),
+                    return Err(ParserError::MalformedFuncDecl(
+                        "expected `=` afer identifier".into(),
                     ));
                 }
 
@@ -29,9 +30,8 @@ impl Parser {
                     value: Box::new(value),
                 });
             } else {
-                return Err(ParserError::ExpectedAfter(
-                    "identifier".into(),
-                    "let".into(),
+                return Err(ParserError::MalformedFuncDecl(
+                    "expected identifier after `let`".into(),
                 ));
             }
         }
@@ -47,11 +47,10 @@ impl Parser {
                 });
             }
             return Err(ParserError::InvalidAssignment(
-                "target must be an identifier".into(),
+                "assignment target must be an identifier".into(),
             ));
         }
 
         Ok(expr)
     }
 }
-

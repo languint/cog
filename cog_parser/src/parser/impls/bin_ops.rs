@@ -1,4 +1,8 @@
-use crate::parser::{core::{expr::Expr, ops::BinaryOp, token::Token}, errors::ParserError, Parser};
+use crate::parser::{
+    Parser,
+    core::{expr::Expr, ops::BinaryOp, token::Token},
+    errors::ParserError,
+};
 
 impl Parser {
     pub fn or(&mut self) -> Result<Expr, ParserError> {

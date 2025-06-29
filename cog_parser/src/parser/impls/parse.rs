@@ -1,4 +1,8 @@
-use crate::parser::{core::{expr::Expr, token::Token}, errors::ParserError, Parser};
+use crate::parser::{
+    Parser,
+    core::{expr::Expr, token::Token},
+    errors::ParserError,
+};
 
 impl Parser {
     pub fn parse(&mut self) -> Result<Vec<Expr>, ParserError> {
@@ -26,6 +30,12 @@ impl Parser {
     pub fn expression(&mut self) -> Result<Expr, ParserError> {
         if let Some(Token::KeywordIf) = self.peek() {
             return self.if_else();
+        }
+        if let Some(Token::KeywordFn) = self.peek() {
+            return self.func_declaration();
+        }
+        if let Some(Token::KeywordReturn) = self.peek() {
+            return self.parse_return();
         }
         self.assignment()
     }

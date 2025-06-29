@@ -1,60 +1,26 @@
-use std::fmt;
+use std::fmt::{self};
 
-use owo_colors::OwoColorize;
-
-const ERROR_PREFIX: &str = "P";
-
-#[derive(PartialEq)]
+#[derive(PartialEq, Debug, Clone)]
 pub enum ParserError {
-    UnknownChar(char),
+    UnknownType(String),
+    UnknownCharInInput(char),
+    MalformedBinaryOperator(String),
+    MalformedFuncDecl(String),
+    MalformedReturn(String),
+    MalformedVarDecl(String),
+    MalformedIfElse(String),
+    MalformedExpression(String),
+    MalformedBlock(String),
+    InvalidAssignment(String),
+    ExpectedToken(String),
     UnexpectedToken(String),
     UnexpectedEndOfInput,
-    ExpectedToken(String),
-    ExpectedAfter(/* expected */ String, /* after */ String),
-    ExpectedAfterCustom(
-        /* msg */ String,
-        /* expected */ String,
-        /* after */ String,
-    ),
-    InvalidAssignment(String),
 }
 
 impl fmt::Display for ParserError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{}", get_error_message(self))
-    }
-}
-
-impl fmt::Debug for ParserError {
-    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        write!(f, "{:?}", get_error_message(self))
+        write!(f, "{:?}", self)
     }
 }
 
 impl std::error::Error for ParserError {}
-
-pub fn get_error_message(err: &ParserError) -> String {
-    let msg: (i32, String) = match err {
-        ParserError::UnknownChar(c) => (0, format!("Unknown character `{}`", c)),
-        ParserError::UnexpectedToken(token) => (1, format!("Unexpected token `{}`", token)),
-        ParserError::UnexpectedEndOfInput => (2, "Unexpected end of input".to_string()),
-        ParserError::ExpectedToken(token) => (3, format!("Expected token `{}`", token)),
-        ParserError::ExpectedAfter(expected, after) => (
-            4,
-            format!("Expected token `{}` after `{}`", expected, after),
-        ),
-        ParserError::ExpectedAfterCustom(msg, expected, after) => {
-            (4, format!("Expected {} after {} {}", msg, expected, after))
-        }
-        ParserError::InvalidAssignment(msg) => (5, format!("Invalid assignment {}", msg)),
-    };
-
-    format!(
-        "{}[{}{:04}]{} {}",
-        "error".red(),
-        ERROR_PREFIX.red(),
-        msg.0.red(),
-        ":".bold(),
-        msg.1.bold()
-    )
-}

@@ -1,4 +1,8 @@
-use crate::parser::{core::{token::Token, types::Types}, errors::ParserError, Parser};
+use crate::parser::{
+    Parser,
+    core::{token::Token, types::Types},
+    errors::ParserError,
+};
 
 impl Parser {
     pub fn parse_type(&mut self) -> Result<Types, ParserError> {
@@ -15,10 +19,7 @@ impl Parser {
                         "f64" => Ok(Types::F64),
                         "bool" => Ok(Types::Bool),
                         "String" => Ok(Types::String),
-                        _ => Err(ParserError::UnexpectedToken(format!(
-                            "unknown type: {}",
-                            type_name
-                        ))),
+                        _ => Err(ParserError::UnknownType(type_name)),
                     }
                 }
                 Token::KeywordTypeI32 => {

@@ -23,7 +23,7 @@ pub enum Expr {
         var_type: Option<Types>,
         value: Box<Expr>,
     },
-    Function {
+    FunctionDeclaration {
         identifier: String,
         parameters: Vec<Expr>,
         body: Box<Expr>,

@@ -1,4 +1,12 @@
-use crate::parser::{core::{expr::Expr, ops::{BinaryOp, UnaryOp}, token::Token}, errors::ParserError, Parser};
+use crate::parser::{
+    Parser,
+    core::{
+        expr::Expr,
+        ops::{BinaryOp, UnaryOp},
+        token::Token,
+    },
+    errors::ParserError,
+};
 
 impl Parser {
     pub fn match_equality_op(&mut self) -> Option<BinaryOp> {

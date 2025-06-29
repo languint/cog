@@ -1,9 +1,6 @@
 use logos::Logos;
 
-use crate::parser::{
-    core::token::Token,
-    errors::ParserError,
-};
+use crate::parser::{core::token::Token, errors::ParserError};
 
 pub mod core;
 pub mod errors;
@@ -38,7 +35,9 @@ impl Parser {
                     } else if slice.chars().all(|c| c.is_alphanumeric() || c == '_') {
                         tokens.push(Token::Identifier(slice.into()));
                     } else {
-                        return Err(ParserError::UnknownChar(slice.chars().next().unwrap()));
+                        return Err(ParserError::UnknownCharInInput(
+                            slice.chars().next().unwrap(),
+                        ));
                     }
                 }
             }
@@ -53,6 +52,7 @@ impl Parser {
 }
 
 impl Parser {
+    /// Peeks into the next token, if the token matches it is consumed.
     fn match_token(&mut self, expected: &Token) -> bool {
         if let Some(t) = self.peek() {
             if std::mem::discriminant(t) == std::mem::discriminant(expected) {
