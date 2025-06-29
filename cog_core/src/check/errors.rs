@@ -1,9 +1,7 @@
 use std::fmt::{self};
 
 #[derive(PartialEq, Debug, Clone)]
-pub enum CheckError {
-
-}
+pub enum CheckError {}
 
 impl fmt::Display for CheckError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {

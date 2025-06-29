@@ -19,7 +19,6 @@ impl Display for CliError {
     }
 }
 
-
 pub fn get_print_error(error: &CliError) -> String {
     match error {
         CliError::InternalError(msg) => format!("(C000): Internal error: {}", msg),

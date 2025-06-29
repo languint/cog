@@ -1,10 +1,27 @@
-use std::{fs::File, io::Write, path::Path, process::{self, Command}, time::Instant};
+use std::{
+    fs::File,
+    io::Write,
+    path::Path,
+    process::{self, Command},
+    time::Instant,
+};
 
 use clap::Parser;
 use cog_parser::parser;
-use inkwell::{context::Context, targets::{CodeModel, FileType, InitializationConfig, RelocMode, Target, TargetMachine}, OptimizationLevel};
+use inkwell::{
+    OptimizationLevel,
+    context::Context,
+    targets::{CodeModel, FileType, InitializationConfig, RelocMode, Target, TargetMachine},
+};
 
-use crate::{cli::{make_folder, print_error, print_section, print_value, print_warning, read_file, Cli, CliCommand}, config::find_target_files, errors::CliError};
+use crate::{
+    cli::{
+        Cli, CliCommand, make_folder, print_error, print_section, print_value, print_warning,
+        read_file,
+    },
+    config::find_target_files,
+    errors::CliError,
+};
 use owo_colors::OwoColorize;
 
 mod cli;
@@ -160,7 +177,8 @@ fn build(current_dir: &Path, log_level: LogLevel) {
 
         let target_machine = target_machine.unwrap();
 
-        let mem_buffer = target_machine.write_to_memory_buffer(&codegen.lvvm_module, FileType::Object);
+        let mem_buffer =
+            target_machine.write_to_memory_buffer(&codegen.lvvm_module, FileType::Object);
 
         if mem_buffer.is_err() {
             print_error(mem_buffer.err().unwrap().to_string().as_str(), 0);
