@@ -1,8 +1,11 @@
 use std::fmt::{self};
 
+use cog_parser::parser::core::types::Types;
+
 #[derive(PartialEq, Debug, Clone)]
 pub enum CodeGenError {
-
+    UnknownType(Types),
+    NotImplemented(String)
 }
 
 impl fmt::Display for CodeGenError {
