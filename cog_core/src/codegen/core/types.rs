@@ -1,5 +1,8 @@
 use cog_parser::parser::core::types::Types;
-use inkwell::{types, AddressSpace};
+use inkwell::{
+    AddressSpace,
+    types::{self},
+};
 
 use crate::codegen::CodeGen;
 
@@ -11,7 +14,9 @@ impl<'ctx> CodeGen<'ctx> {
             Types::F32 => self.llvm_ctx.f32_type().into(),
             Types::F64 => self.llvm_ctx.f64_type().into(),
             Types::Bool => self.llvm_ctx.bool_type().into(),
-            Types::String => self.llvm_ctx.ptr_type(AddressSpace::default()).into(),
+            Types::Pointer(_) | Types::String => {
+                self.llvm_ctx.ptr_type(AddressSpace::default()).into()
+            }
         }
     }
 }

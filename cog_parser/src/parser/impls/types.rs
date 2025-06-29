@@ -49,9 +49,7 @@ impl Parser {
                     let pointee_type = self.parse_type()?;
                     Ok(Types::Pointer(Box::new(pointee_type)))
                 }
-                _ => {
-                    Err(ParserError::ExpectedToken("type".into()))
-                }
+                _ => Err(ParserError::ExpectedToken("type".into())),
             }
         } else {
             Err(ParserError::ExpectedToken("type".into()))

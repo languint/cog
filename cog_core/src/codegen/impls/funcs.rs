@@ -11,7 +11,11 @@ impl<'ctx> CodeGen<'ctx> {
         body: &Expr,
         ret_type: &Option<Types>,
     ) -> Result<(), CodeGenError> {
-        let ret_type = if let Some(t) = ret_type { self.get_llvm_type(t) } else { self.get_llvm_type(&Types::I32)};
+        let ret_type = if let Some(t) = ret_type {
+            self.get_llvm_type(t)
+        } else {
+            self.get_llvm_type(&Types::I32)
+        };
 
         let fn_type = ret_type.fn_type(&[], false); //TODO: Support var args and params later.
 
